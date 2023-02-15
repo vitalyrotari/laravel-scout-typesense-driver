@@ -147,9 +147,13 @@ class Typesense
         /**
          * @var $document Document
          */
-        $document = $collectionIndex->getDocuments()[(string) $modelId];
+        $document = $collectionIndex->getDocuments()[(string) $modelId] ?? null;
 
-        return $document->delete();
+        if ($document) {
+            return $document->delete();
+        }
+
+        return [];
     }
 
     /**
